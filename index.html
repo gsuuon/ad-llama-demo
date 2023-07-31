@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>ad-llama demo</title>
+  </head>
+  <body>
+    <h1>Hello, MLC! Open the console</h1>
+    <p><code>generator</code> is available on <code>window</code> in console.</p>
+    <pre><code>
+const { template, a } = generator(
+  '&lt;&lt;sys&gt;&gt;You are a dungeon master. &lt;&lt;/sys&gt;&gt;\n\n[INST] Create a character based on the Dungeons and Dragons universe.'
+)
+
+const result = template`
+{
+"description": "${a('short description')}",
+"name": "${a('character name')}",
+"weapon": "${a('weapon')}",
+"class": "${a('class')}"
+}
+`
+
+const asString = await result.collect()
+console.log(asString)
+console.dir(JSON.parse(asString))
+    </code></pre>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
